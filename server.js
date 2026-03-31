@@ -108,16 +108,11 @@ app.delete(
 
 userService.connect()
   .then(() => {
-    console.log("MongoDB connected");
+    app.listen(HTTP_PORT, () => {
+      console.log("API listening on: " + HTTP_PORT);
+    });
   })
   .catch((err) => {
-    console.log("unable to connect to MongoDB: " + err);
+    console.log("unable to start the server: " + err);
+    process.exit();
   });
-
-if (process.env.NODE_ENV !== "production") {
-  app.listen(HTTP_PORT, () => {
-    console.log("API listening on: " + HTTP_PORT);
-  });
-}
-
-module.exports = app;
